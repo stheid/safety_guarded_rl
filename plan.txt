@@ -1,0 +1,8 @@
+# oracle
+
+the oracle provides a function to validate a policy. it will take the policy, query it with states and verify that the follow up states are good.
+it will than return a float or boolean value how save the policy is
+
+# agent
+
+i will need to write an agent that inherits from the stable baselines ppo and that calls the oracle in every update step and skip updatesteps with respect to the oracles performance
