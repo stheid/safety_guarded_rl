@@ -11,7 +11,7 @@ np.random.seed(0)
 
 timestamp = datetime.now().strftime(f'%Y.%b.%d %X ')
 makedirs(timestamp)
-env = gym.make('lti_gym:simple_grid-v0', tensorboard_log=f'{timestamp}/')
+env = gym.make('lti_gym:simple_grid-v0')
 
 with open(f'{timestamp}/env.txt', 'w') as f:
     print(str(env), file=f)
@@ -21,10 +21,11 @@ model = PPO('MlpPolicy', env, verbose=1, tensorboard_log=f'{timestamp}/')
 model.learn(total_timesteps=5000000)
 model.save(f'{timestamp}/model')
 
+env.tensorboard_log = f'{timestamp}/'
 returns = []
 for i in range(100):
     obs = env.reset()
-    for _ in range(1000):
+    for _ in range(env.steps_max):
         env.render()
         action, _states = model.predict(obs, deterministic=True)
         obs, reward, done, info = env.step(action)
