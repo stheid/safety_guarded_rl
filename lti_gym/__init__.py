@@ -11,7 +11,7 @@ inductance = 1e-3  # milli Henry
 resistance = 5e-3  # milli Ohm
 
 dt = 1e-5
-steps_max = 1e3
+steps_max = int(1e3)
 
 state_range = [-np.full((2, 1), 1), np.full((2, 1), 1)]
 

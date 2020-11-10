@@ -18,10 +18,10 @@ class LQR_Agent(Agent):
             R = np.zeros((B.shape[1], B.shape[1]))
 
         P = solve_discrete_are(A, B, Q, R)
-        self.policy = np.linalg.inv(R + B.T @ P @ B) @ (B.T @ P @ A)
+        self.policy = -np.linalg.inv(R + B.T @ P @ B) @ (B.T @ P @ A)
 
     def observe(self, reward, terminated):
         pass
 
     def act(self, obs):
-        return -self.policy @ obs
+        return self.policy @ obs
