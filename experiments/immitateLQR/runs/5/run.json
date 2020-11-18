@@ -1,0 +1,77 @@
+{
+  "artifacts": [
+    "bc_model.zip",
+    "final_model.zip"
+  ],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/home/sheid/sciebo/PhD/2020.10 \u2014 safety guarded RL learning/safety_guarded_rl/experiments/immitateLQR",
+    "dependencies": [
+      "gym==0.17.1",
+      "imitation==0.2.0",
+      "numpy==1.19.2",
+      "pandas==1.1.3",
+      "sacred==0.8.1",
+      "stable-baselines3==0.8.0"
+    ],
+    "mainfile": "bc_imitate.py",
+    "name": "BC_imitation",
+    "repositories": [
+      {
+        "commit": "2891d6093920f189d2dc6ebab5e8de0fd0055a44",
+        "dirty": true,
+        "url": "https://github.com/stheid/safety_guarded_rl.git"
+      }
+    ],
+    "sources": [
+      [
+        "bc_imitate.py",
+        "_sources/bc_imitate_7a7179b3966f822b2a13b42779fc1e88.py"
+      ]
+    ]
+  },
+  "heartbeat": "2020-11-17T15:38:39.520263",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "hostname": "xps15-sheid",
+    "os": [
+      "Linux",
+      "Linux-5.4.67-1-MANJARO-x86_64-with-glibc2.2.5"
+    ],
+    "python_version": "3.8.6"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": "\n   count        mean         std          min          25%          50%         75%         max\n0  100.0  947.379945   48.888214   839.002495   904.725817   968.144561  991.483306  999.996128\n1  100.0 -862.053960  505.050367 -1001.961472 -1000.791883 -1000.000000 -999.151462  994.238404\n2  100.0  108.964674  988.968313 -1003.393488 -1000.840948   957.294230  989.254138  997.798086",
+  "start_time": "2020-11-17T14:28:32.526318",
+  "status": "COMPLETED",
+  "stop_time": "2020-11-17T15:38:39.518678"
+}

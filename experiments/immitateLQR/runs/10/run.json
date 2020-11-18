@@ -1,0 +1,78 @@
+{
+  "artifacts": [
+    "bc_model.zip",
+    "final_model.zip",
+    "results.csv"
+  ],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/home/sheid/sciebo/PhD/2020.10 \u2014 safety guarded RL learning/safety_guarded_rl/experiments/immitateLQR",
+    "dependencies": [
+      "gym==0.17.1",
+      "imitation==0.2.0",
+      "numpy==1.19.2",
+      "pandas==1.1.3",
+      "sacred==0.8.1",
+      "stable-baselines3==0.8.0"
+    ],
+    "mainfile": "bc_imitate.py",
+    "name": "BC_imitation",
+    "repositories": [
+      {
+        "commit": "2891d6093920f189d2dc6ebab5e8de0fd0055a44",
+        "dirty": true,
+        "url": "https://github.com/stheid/safety_guarded_rl.git"
+      }
+    ],
+    "sources": [
+      [
+        "bc_imitate.py",
+        "_sources/bc_imitate_d190e8a6c80aab8aba14d87768dae951.py"
+      ]
+    ]
+  },
+  "heartbeat": "2020-11-17T18:25:08.768685",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "hostname": "xps15-sheid",
+    "os": [
+      "Linux",
+      "Linux-5.4.67-1-MANJARO-x86_64-with-glibc2.2.5"
+    ],
+    "python_version": "3.8.6"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": "\n       count       mean        std         min        25%        50%        75%        max\nlqr    100.0  54.489127  42.283219  -39.246091  17.597744  72.448360  92.633946  99.996651\nbc     100.0  54.491743  42.278817  -39.236334  17.603381  72.446586  92.632861  99.996672\nfinal  100.0  54.175285  41.523940 -100.000000  20.922805  70.192927  91.138021  97.088276",
+  "start_time": "2020-11-17T15:58:40.322571",
+  "status": "COMPLETED",
+  "stop_time": "2020-11-17T18:25:08.766955"
+}

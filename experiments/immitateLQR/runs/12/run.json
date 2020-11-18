@@ -1,0 +1,87 @@
+{
+  "artifacts": [
+    "bc_model.zip",
+    "final_model.zip",
+    "results.csv"
+  ],
+  "command": "main",
+  "experiment": {
+    "base_dir": "/home/sheid/sciebo/PhD/2020.10 \u2014 safety guarded RL learning/safety_guarded_rl/experiments/immitateLQR",
+    "dependencies": [
+      "gym==0.17.1",
+      "imitation==0.2.0",
+      "joblib==0.16.0",
+      "numpy==1.19.2",
+      "pandas==1.1.3",
+      "sacred==0.8.1",
+      "stable-baselines3==0.8.0"
+    ],
+    "mainfile": "bc_imitate.py",
+    "name": "BC_imitation",
+    "repositories": [
+      {
+        "commit": "2891d6093920f189d2dc6ebab5e8de0fd0055a44",
+        "dirty": true,
+        "url": "https://github.com/stheid/safety_guarded_rl.git"
+      }
+    ],
+    "sources": [
+      [
+        "bc_imitate.py",
+        "_sources/bc_imitate_194dfb664bbf50f5f588323b215dfdf5.py"
+      ]
+    ]
+  },
+  "fail_trace": [
+    "Traceback (most recent call last):\n",
+    "  File \"/usr/lib/python3.8/contextlib.py\", line 120, in __exit__\n    next(self.gen)\n",
+    "  File \"/home/sheid/.local/lib/python3.8/site-packages/sacred/stdout_capturing.py\", line 175, in tee_output_fd\n    tee_stdout.wait(timeout=1)\n",
+    "  File \"/usr/lib/python3.8/subprocess.py\", line 1079, in wait\n    return self._wait(timeout=timeout)\n",
+    "  File \"/usr/lib/python3.8/subprocess.py\", line 1796, in _wait\n    raise TimeoutExpired(self.args, timeout)\n",
+    "subprocess.TimeoutExpired: Command '['tee', '-a', '/tmp/tmpcx_wcu75']' timed out after 1 seconds\n"
+  ],
+  "heartbeat": "2020-11-18T09:29:53.770002",
+  "host": {
+    "ENV": {},
+    "cpu": "Intel(R) Core(TM) i7-9750H CPU @ 2.60GHz",
+    "hostname": "xps15-sheid",
+    "os": [
+      "Linux",
+      "Linux-5.4.74-1-MANJARO-x86_64-with-glibc2.2.5"
+    ],
+    "python_version": "3.8.6"
+  },
+  "meta": {
+    "command": "main",
+    "options": {
+      "--beat-interval": null,
+      "--capture": null,
+      "--comment": null,
+      "--debug": false,
+      "--enforce_clean": false,
+      "--file_storage": null,
+      "--force": false,
+      "--help": false,
+      "--loglevel": null,
+      "--mongo_db": null,
+      "--name": null,
+      "--pdb": false,
+      "--print-config": false,
+      "--priority": null,
+      "--queue": false,
+      "--s3": null,
+      "--sql": null,
+      "--tiny_db": null,
+      "--unobserved": false,
+      "COMMAND": null,
+      "UPDATE": [],
+      "help": false,
+      "with": false
+    }
+  },
+  "resources": [],
+  "result": "\n       count        mean        std         min         25%         50%         75%         max\nlqr    100.0  949.047623  49.595922  850.259757  915.872177  966.129322  992.482517  999.999787\nbc     100.0  949.046317  49.597132  850.253914  915.871077  966.128494  992.481759  999.999364\nfinal  100.0  946.943610  49.890649  848.654307  913.215635  963.673385  990.440627  998.201018",
+  "start_time": "2020-11-18T09:01:17.487169",
+  "status": "FAILED",
+  "stop_time": "2020-11-18T09:29:53.771045"
+}

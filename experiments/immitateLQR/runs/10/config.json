@@ -1,0 +1,8 @@
+{
+  "bc_expert_eps": 100000,
+  "bc_train_eps": 1,
+  "eps_steps": 100,
+  "eval_eps": 100,
+  "seed": 447364971,
+  "train_steps": 100000
+}
