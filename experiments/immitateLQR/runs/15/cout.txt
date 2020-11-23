@@ -1,0 +1,8 @@
+INFO - BC_imitation - Running command 'main'
+INFO - BC_imitation - Started run with ID "15"
+/usr/lib/python3.8/site-packages/gym/logger.py:30: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  warnings.warn(colorize('%s: %s'%('WARN', msg % args), 'yellow'))
+INFO - BC_imitation - Result: 
+       count        mean         std          min          25%         50%         75%         max
+lqr    100.0  949.047623   49.595922   850.259757   915.872177  966.129322  992.482517  999.999787
+final  100.0  416.952582  847.711829 -1004.903101 -1000.000000  876.078586  956.963459  993.041752

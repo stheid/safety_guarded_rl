@@ -1,0 +1,16 @@
+{
+  "bc_expert_eps": 0,
+  "bc_train_eps": 1,
+  "eps_steps": 1000,
+  "eval_eps": 100,
+  "rl_classes": {
+    "learner": {
+      "py/type": "stable_baselines3.ddpg.ddpg.DDPG"
+    },
+    "policy": {
+      "py/type": "__main__.TD3ACPolicy"
+    }
+  },
+  "seed": 45692943,
+  "train_steps": 1000000
+}

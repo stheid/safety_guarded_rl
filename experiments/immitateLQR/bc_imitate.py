@@ -1,18 +1,20 @@
 from contextlib import redirect_stdout, redirect_stderr
 from os import devnull
 from tempfile import NamedTemporaryFile
+from typing import Tuple
 
 import gym
 import numpy as np
 import pandas as pd
-import stable_baselines3 as sb3
+import torch as th
 from imitation.algorithms.bc import BC
 from imitation.data import rollout
 from imitation.data.types import Trajectory
 from joblib import Parallel, delayed
 from sacred import Experiment
 from sacred.observers import FileStorageObserver
-from stable_baselines3.common.policies import ActorCriticPolicy
+from stable_baselines3 import DDPG
+from stable_baselines3.td3.policies import TD3Policy
 
 from lti_gym.agents import LQR_Agent
 
@@ -20,17 +22,39 @@ ex = Experiment('BC_imitation')
 ex.observers.append(FileStorageObserver('runs'))
 
 
+def policy_factory(base, model=None):
+    if model:
+        class CopyPolicy(base):
+            def __new__(*args, **kwargs):
+                return model
+    else:
+        class CopyPolicy(base):
+            pass
+    return CopyPolicy
+
+
+class TD3ACPolicy(TD3Policy):
+    def evaluate_actions(self, obs: th.Tensor, actions: th.Tensor) -> Tuple[th.Tensor, th.Tensor, th.Tensor]:
+        latent_pi = latent_sde = self.actor(obs)
+        # the below is only a copy from the ActorCriticPolicy class.
+        # The function is only returning dummy values because its not clear how the proper implementation would look like
+        # distribution = self._get_action_dist_from_latent(latent_pi, latent_sde)
+        # log_prob = distribution.log_prob(actions)
+        return None, th.tensor([0], dtype=th.float32), th.tensor([0], dtype=th.float32)
+
+
 @ex.config
 def cfg():
     eval_eps = 100
     eps_steps = 1000
-    bc_expert_eps = 0
-    bc_train_eps = 1
-    train_steps = 1000000
+    bc_expert_eps = 100
+    bc_train_eps = 100
+    train_steps = 10 ** 5
+    rl_classes = dict(learner=DDPG, policy=TD3ACPolicy)
 
 
 @ex.automain
-def main(eval_eps, eps_steps, bc_expert_eps, bc_train_eps, train_steps):
+def main(eval_eps, eps_steps, bc_expert_eps, bc_train_eps, train_steps, rl_classes):
     def evaluate(env, agent, squeezed=False, bc_expert_eps=0):
         def exec_eps(i):
             np.random.seed(i)
@@ -67,23 +91,20 @@ def main(eval_eps, eps_steps, bc_expert_eps, bc_train_eps, train_steps):
         transitions = rollout.flatten_trajectories(trajs)
         with redirect_stdout(open(devnull, 'w')) and redirect_stderr(open(devnull, 'w')):
             bc_trainer = BC(env.observation_space, env.action_space, expert_data=transitions,
-                            policy_class=ActorCriticPolicy)
+                            policy_class=rl_classes['policy'])
             bc_trainer.train(n_epochs=bc_train_eps)
 
         _, r = evaluate(env, lambda obs: bc_trainer.policy.predict(obs, deterministic=True)[0])
         results.append(r)
 
         # copy policy
-        class CopyPolicy(ActorCriticPolicy):
-            def __new__(cls, *args, **kwargs):
-                return bc_trainer.policy
+        PolicyClass = policy_factory(rl_classes['policy'], bc_trainer.policy)
     else:
-        class CopyPolicy(ActorCriticPolicy):
-            pass
+        PolicyClass = policy_factory(rl_classes['policy'])
 
     # continue training
     with redirect_stdout(open(devnull, 'w')) and redirect_stderr(open(devnull, 'w')):
-        model = sb3.PPO(CopyPolicy, env)
+        model = rl_classes['learner'](PolicyClass, env)
         with NamedTemporaryFile() as t:
             model.save(t.name)
             ex.add_artifact(t.name, 'bc_model.zip')

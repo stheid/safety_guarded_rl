@@ -1,0 +1,19 @@
+{
+  "mean_return_final": {
+    "steps": [
+      0
+    ],
+    "timestamps": [
+      "2020-11-18T12:51:56.867516"
+    ],
+    "values": [
+      {
+        "dtype": "float64",
+        "py/object": "numpy.ndarray",
+        "values": [
+          416.95258153733926
+        ]
+      }
+    ]
+  }
+}
